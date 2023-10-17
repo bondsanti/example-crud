@@ -19,7 +19,7 @@
         <h1 class="text-center">Page แก้ไขข้อมูล</h1>
 
 
-        <form action="{{route('users.update')}}" method="post">
+        <form action="{{route('users.update')}}" method="post"  enctype="multipart/form-data">
 
             @csrf <!-- สำคัญ -->
             <input type="hidden" name="id" value="{{$users->id}}">
@@ -44,6 +44,10 @@
                     <option value="2" {{$users->role == 2 ? 'selected':''}}>User</option>
                 </select>
                 <small class="text-danger"> @error('role') {{ $message }}  @enderror   </small>
+            </div>
+            <div class="form-group">
+                <label for="">รูปภาพ</label>
+                <input type="file" name="img_new">
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>

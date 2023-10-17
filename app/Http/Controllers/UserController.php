@@ -43,13 +43,28 @@ class UserController extends Controller
           'role.required'=>'กรุณาเลือก สิทธิใช้งาน',
         ]);
 
+
+
         //ดึง Model User เพื่อ insert ลงฐานข้อมูล
         $users = new User;
+
 
         $users->username = $request->username;
         $users->password = Hash::make($request->password);
         $users->fullname = $request->fullname;
         $users->role = $request->role;
+
+        if ($request->hasFile('img')) {
+
+            // $path = $request->file('img')->store('image','public');
+
+            $imgName = time().'.'.$request->file('img')->getClientOriginalExtension();
+            $request->file('img')->move(public_path('images'),$imgName);
+            $thumPath= 'images/'.$imgName;
+            $users->img = $thumPath;
+        }
+
+
         $checkOk = $users->save();
 
         if ($checkOk) {
@@ -77,9 +92,22 @@ class UserController extends Controller
     {
         $users = User::where('id',$request->id)->first();
 
+
         $users->username = $request->username;
         $users->fullname = $request->fullname;
         $users->role = $request->role;
+
+        if ($request->hasFile('img_new')) {
+
+            // $d=unlink(public_path($users->img));
+            // dd($d);
+
+            $imgName = time().'.'.$request->file('img_new')->getClientOriginalExtension();
+            $request->file('img_new')->move(public_path('images'),$imgName);
+            $thumPath= 'images/'.$imgName;
+            $users->img = $thumPath;
+         }
+
         $users->save();
 
         Alert::success('Success','อัพเดทข้อมูลสำเร็จ!');

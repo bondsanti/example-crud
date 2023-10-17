@@ -19,7 +19,7 @@
         <h1 class="text-center">Page เพิ่มข้ออมูล</h1>
 
 
-        <form action="{{route('users.insert')}}" method="post">
+        <form action="{{route('users.insert')}}" method="post" enctype="multipart/form-data">
 
             @csrf <!-- สำคัญ -->
 
@@ -47,6 +47,11 @@
                     <option value="2">User</option>
                 </select>
                 <small class="text-danger"> @error('role') {{ $message }}  @enderror   </small>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">รูปภาพ</label>
+                <input type="file" name="img">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

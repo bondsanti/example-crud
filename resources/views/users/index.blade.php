@@ -26,6 +26,7 @@
                 {{-- <th scope="col">Password</th> --}}
                 <th scope="col">Fullname</th>
                 <th scope="col">Role</th>
+                <th>รูป</th>
                 <th>Action</th>
             </tr>
 
@@ -39,6 +40,7 @@
                 {{-- <td>{{$item->password}}</td> --}}
                 <td>{{$item->fullname}}</td>
                 <td>{{$item->role}}</td>
+                <td><img src="{{asset($item->img)}}" alt="" width="240px"></td>
                 <td>
                     <a href="{{url('/users/edit/'.$item->id)}}" class="btn btn-warning">แก้ไข</a>
 

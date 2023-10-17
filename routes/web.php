@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/login',[CustomAuthController::class,'index']);
+Route::post('/login',[CustomAuthController::class,'login'])->name('login');
 
 Route::get('/users',[UserController::class,'index'])->name('users');
 Route::get('/users/create',[UserController::class,'create'])->name('users.create');
